@@ -10,7 +10,5 @@ table = Terminal::Table.new do |t|
      t.add_row [$i+=1, line]
     end
 end
-
-
-
+    
 puts table
