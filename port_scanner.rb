@@ -1,32 +1,45 @@
 require 'socket'
 require 'timeout'
+require 'tty-progressbar'
 
-
+system("clear")
 puts "Your current IP is:"
-system("ip addr | awk '/inet /{ print $2 }' |tail -n -1")
+system("ip -o -4  address show  | awk ' NR==2 { gsub(/\\/.*/, \"\", $4); print $4 } '")
 puts ""
 puts "Enter Your Target"
-puts "IP Address: " 
-ip = gets.chomp
-puts 'Scanning common ports'
+puts "  or"
+puts "Press Enter for Local-Host IP"
+puts "IP Address: "
 
-ports = [22, 53, 135, 137, 445, 1042, 1043, 2869, 5040, 51330]
-begin
-ports.each do |scan|
+# Loopback Adapter acts as local IP, by pressing enter it means 
+# We are selecting Lo (127.0.0.1) 
+ip = gets.chomp || "localhost"
+puts 'Scanning common ports...'
 
-    socket = Timeout::timeout(3){TCPSocket.new("#{ip}", scan)}
-    status = puts "open: #{scan}"
+# Progress Bar
+bar = TTY::ProgressBar.new("Scanning [:bar]", total: 15)
+15.times do
+  sleep(0.1)
+  bar.advance(1)
+end
+
+
+# Array for Port Range
+port_range = [22, 53, 135, 137, 445, 631, 1042, 1043, 2869, 5040, 51330]
+port_range.each do |port|
+    begin
+    socket = Timeout::timeout(3){TCPSocket.new(ip, port)}
+    status = puts "Open: #{port}"
 rescue
     Errno::ECONNREFUSED
     Errno::ETIMEDOUT
-    status = puts "closed: #{$scan}"
+    status = puts "Closed: #{port}"
     end  
 end
-sleep 4
-puts 'Done! :-)'
-
-
-
+puts '[*] Scan Complete! :-)'
+puts ""
+puts ""
+# Sub menu
 puts "Would you like to: "
 puts "----------------"
 puts "1. Return to main menu"
@@ -41,5 +54,6 @@ elsif user_input == "2"
     exit
 
 else
-    "Does not compute"
+    puts "Error: Invalid Input"
+    puts "Does not compute"
 end
