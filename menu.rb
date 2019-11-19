@@ -28,8 +28,6 @@ sleep(1)
 system('clear')
 end
 
-# puts String.colors                       # return array of all possible colors names
-# puts String.modes  
 puts "Main Menu:"
 puts "----------"
 puts "1. IP Scan Network"
@@ -40,12 +38,15 @@ puts "4. Quit"
 user_input = gets.chomp
 
 if user_input == "1"
+    system('clear')
     require './ip_scan'
 
 elsif user_input == "2"
+    system('clear')
     require './port_scanner'
 
 elsif user_input == "3"
+    system('clear')
     require './macchanger'
 
 elsif user_input == "4"

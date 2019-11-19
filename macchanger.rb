@@ -4,9 +4,6 @@ def get_mac_addr
  dmac = system ("ip addr | awk '/ether/{ print $2 }'")
 end
 
-# Clear Screen
-system('clear')
-
 #Display current MAC
 puts 'Your current MAC Address is: ' 
 get_mac_addr()
@@ -38,20 +35,20 @@ if user_input ==  "1"
   puts 'Enter new MAC [xx:xx:xx:xx:xx:xx]'
   puts ""
   $mac = gets.chomp
-  
+
+  # Changing MAC Address
   puts ""
   puts 'Ethernet down...'
-  # system('sudo ifconfig eth0 down')
   system('sudo systemctl stop NetworkManager.service')
   puts 'Changhing MAC'  
-  # system('sudo ifconfig eth0 hw ether  ')
   system('sudo ip link set dev ' + $interf + ' address ' + $mac)
-
   puts 'Network Starting...'  
   system('sudo systemctl start NetworkManager.service')
-  # system('sudo ifconfig eth0 up')  
   puts 'Done!' 
-  
+  puts 'Your new MAC Address is: ' 
+  get_mac_addr()
+  sleep(3)
+  require './menu.rb'
 
 elsif user_input == "2"
   require './menu.rb'

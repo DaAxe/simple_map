@@ -1,7 +1,8 @@
+# This file displays the output from the IP Scanner 
+# It generates a table of active IPs
 require 'terminal-table'
 $i = 0
 #Adding rows one by one:
-
 table = Terminal::Table.new do |t|
   t << ['Num#', 'IP Address']
   t << :separator
