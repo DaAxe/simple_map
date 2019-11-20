@@ -13,7 +13,7 @@
 ## Usage:
 ## -----
 1. Ip Scanner
-Enter the first 3 number sets, can be 1 or two numbers for each set, separated by a . (dot) 
+Enter the first 3 number sets, can be 1 to three numbers for each set, separated by a . (dot) 
 Your IP is displayed to make it easy to test using your own IP subnet configuration. 
 After the scan is complete the active IPs will be displayed in a numbered table.
 
