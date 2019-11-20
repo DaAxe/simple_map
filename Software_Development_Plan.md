@@ -37,7 +37,7 @@ The sub-menu will allow for further functionality, ask to return to main menu or
                 • Some Error Handling Added – Error Handling for unexpected input
 
 ### Control Flow Diagram:
-[add image]
+![alt text](https://raw.githubusercontent.com/DaAxe/simple_map/master/Control_Flow_Diagram.PNG "Control Flow Diagram for Simple Map")
 
 
 
