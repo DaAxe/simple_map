@@ -1,7 +1,7 @@
 # Development Log
 
 ## Days 1 - 3 (10-13/11/19)
-App includes 3 main features including
+The App has 3 main features including
 1. Ip Scanner
 2. Port Scanner
 3. MAC Changer
@@ -18,5 +18,12 @@ EDIT: Later found out that I didn't need to needlessly use class to use require.
 ## Day 6 (16/11/2019)
 Linked all the aspects of the menus and submenus of the app together, still needs a couple of things like printing results into a table. 
 Doing Development Plan today.
+
+## Day 10 (20/11/2019)
+Portscanner fixed, was really just a networking issue, added "enter for localhost" to correct for IP differences. 
+So far unable to adapt the gem tty-prompt to my menu. 
+Able to write the menu but I am unable to run the different features via require. 
+### Edit
+Added colour to menus and added gem tty-prompt.
 
 

@@ -1,4 +1,5 @@
-
+require 'tty-prompt'
+require 'colorize'
 #Module to get MAC
 def get_mac_addr
  dmac = system ("ip addr | awk '/ether/{ print $2 }'")
@@ -7,24 +8,25 @@ end
 #Display current MAC
 puts 'Your current MAC Address is: ' 
 get_mac_addr()
+puts ""
+puts ""
 
-puts ""
-puts ""
-puts  'Would you like to:'
-puts '------------------'
-puts ' 1. Change your MAC Address'
-puts ' 2. Back to Main'
-puts ' 3. Quit'
-puts ""
-puts "Select number (1-3)"
-user_input = gets.chomp
+# Selection Menu :: Gem Tty-Prompt
+prompt = TTY::Prompt.new(symbols: {marker: '►'})
 
-# Clear Screen
-system('clear')
-if user_input ==  "1"
-  
-  # Enter Network Adapter
-  system("ip addr | awk '/: /{ print $1,$2 }' | sed 's/:/ /2'")
+user_input = 
+prompt.select("Select Option:".colorize(:red).on_blue.underline) do |menu|
+    menu.choice 'Change MAC Address', 1
+    menu.choice 'Back to Main Menu', 2
+    menu.choice 'Quit', 3
+  end
+
+if user_input == 1
+    system('clear')
+   # Enter Network Adapter
+  puts "Available Adapters:" 
+  system("ip addr | awk '/: /{ print $1,$2 }' | sed 's/:/ /2' | cut -c 3-")
+  puts ""
   puts "Enter your Network Interface: (eg. eth0 || wlan0 || enp0s3)"
   $interf = gets.chomp
   
@@ -50,14 +52,14 @@ if user_input ==  "1"
   sleep(3)
   require './menu.rb'
 
-elsif user_input == "2"
+
+elsif user_input == 2
   require './menu.rb'
 
-elsif user_input == "3"
+elsif user_input == 3
   exit
-
+  
 else
-  puts "Does not compute"
-
+    puts "invalid input"
 
 end
