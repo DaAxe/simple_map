@@ -4,7 +4,7 @@ require 'tty-prompt'
 prompt = TTY::Prompt.new(symbols: {marker: '►'})
 
 user_input = 
-prompt.select("Main Menu:") do |menu|
+prompt.select("Main Menu:".red.on_light_green) do |menu|
     menu.choice 'Ip Scanner', 1
     menu.choice 'Port Scanner', 2
     menu.choice 'MAC Changer', 3

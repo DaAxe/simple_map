@@ -16,7 +16,7 @@ However in order to get this working I had to use classes but not in the normal 
 EDIT: Later found out that I didn't need to needlessly use class to use require. Still works, but the portscanner has somehow broken, and none of the previous code seems to work so Im going to have to rewrite that.
 
 ## Day 6 (16/11/2019)
-Linked all the aspects of the menus and submenus of the app together, still needs a couple of things like printing results into a table. 
+Linked all the aspects of the menus and sub-menus of the app together, still needs a couple of things like printing results into an output table. 
 Doing Development Plan today.
 
 ## Day 10 (20/11/2019)
@@ -24,6 +24,8 @@ Portscanner fixed, was really just a networking issue, added "enter for localhos
 So far unable to adapt the gem tty-prompt to my menu. 
 Able to write the menu but I am unable to run the different features via require. 
 ### Edit
-Added colour to menus and added gem tty-prompt.
+Added colour & to menus and added gem tty-prompt.
+Reworked the menus so that they are easier to select using tty-prompt.
+Fixed up styling so that the project is easier to read.
 
 

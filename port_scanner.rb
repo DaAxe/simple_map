@@ -1,6 +1,14 @@
 require 'socket'
 require 'timeout'
 require 'tty-progressbar'
+require 'tty-prompt'
+require 'colorize'
+require 'pastel'
+
+pastel = Pastel.new
+green  = pastel.on_green(" ")
+red    = pastel.on_red(" ")
+
 
 system("clear")
 puts "Your current IP is:"
@@ -14,10 +22,15 @@ puts "IP Address: "
 # Loopback Adapter acts as local IP, by pressing enter it means 
 # We are selecting Lo (127.0.0.1) 
 ip = gets.chomp || "localhost"
-puts 'Scanning common ports...'
+puts 'Scanning common ports...'.yellow
 
 # Progress Bar
-bar = TTY::ProgressBar.new("Scanning [:bar]", total: 15)
+bar = TTY::ProgressBar.new("Scanning [:bar]", 
+    total: 15, 
+    total: 15,
+    complete: green,
+    incomplete: red
+  )
 15.times do
   sleep(0.1)
   bar.advance(1)
@@ -39,21 +52,24 @@ end
 puts '[*] Scan Complete! :-)'
 puts ""
 puts ""
-# Sub menu
-puts "Would you like to: "
-puts "----------------"
-puts "1. Return to main menu"
-puts "2. Quit"
-puts ""
-user_input = gets.chomp
+sleep(1)
+# Selection Menu :: Gem Tty-Prompt
+prompt = TTY::Prompt.new(symbols: {marker: '►'}, active_color: :cyan)
 
-if user_input == "1"
-require "./menu"
+user_input = 
+prompt.select("Select Option:".red.on_light_green) do |menu|
+    menu.choice 'Back to Main Menu', 1
+    menu.choice 'Quit', 2
+  end
 
-elsif user_input == "2"
+if user_input == 1
+    system('clear')
+    require './menu.rb'
+
+elsif user_input == 2
     exit
 
+elsif user_input == 3
 else
-    puts "Error: Invalid Input"
-    puts "Does not compute"
+    puts "invalid input"
 end
