@@ -1,10 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+## Welcome to the amazing stress-free Setup.file
 
 echo 'Installing bundler'
 gem install bundler
-
-echo 'Setting up bundler'
-bundle init
 
 echo 'Adding Bundled Gems'
 bundle add colorize
@@ -14,10 +12,7 @@ bundle add tty
 echo 'Installing Bundled Gems'
 bundle install
 
-#bundle exec 
-# echo 'Installing Gem: Colorize'
-# gem install colorize
-# echo 'colorize Installed'
-# echo 'Installing Gem: Terminal-Table'
-# sudo gem install terminal-table
-# echo 'Terminal-Table Installed'
+echo 'Starting Application'
+ruby start.rb
+
+

@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require 'tty-prompt'
 require 'colorize'
 flash = 0

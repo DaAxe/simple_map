@@ -22,7 +22,7 @@ rescue
  puts "Invalid Address config...".red.blink
  puts "~ Try Again ~".red.blink
  
- require './ip_scan.rb'   
+ retry
 end
     
     # Added so the full range isn't scanned - takes too long

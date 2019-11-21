@@ -68,3 +68,113 @@ In this application we are basically only taking note of the Open ports (SYN/ACK
 ### MAC Changer:
 A Media Access Control (MAC) Address of a device is an internationally unique identifier assigned to a network interface such as wifi or ethernet. It has been well known for some time that Internet Service Providers and National Security Agencies keep constant tabs on these identifiers as a method of tracking the movements of devices across networks. 
 To prevent this form of tracking the feature for MAC address changing, also known as, MAC Spoofing was added. 
+
+## Implementation Plan:
+
+    • IP Scanner (COMPLETE)
+        ◦ Specify network adpater (30mins)
+        ◦ Specify IP subnet (30 mins)
+Implementation of this feature will require the ‘ipaddr’ which provides a set of methods to manipulate an IP address. This class used to map the “in scope” IP subnet. I will also need to use linux commands to clean up the output in a presentable manner for the user.
+User input will be required to specify the subnet. 
+
+    • Port Scanner (COMPLETE) (1-2 hours)
+        ◦ Specify IP to scan
+In order to get this feature to function we will require ‘socket’. This creates a TCPSocket which represents a TCP/IP client socket, which is an open port through which applications can communicate. To make this connection we will need to specify the port number and the IP/Host address to be scanned. We will need to generate the port range either based on user input or pre-defined arrays of common ports. Linux terminal commands will need to be used to clean up output. 
+Perhaps a shortened version of the port range could be created to save time when testing the app.
+For the output we will require ‘terminal-table’ gem to generate a table with the output. 
+
+    • MAC Changer
+        ◦ Enter MAC Address (1-2 hours)
+This feature can completely be accomplished with linux terminal commands, to take down the network interface, change the MAC and put up the interface again. 
+User input will be required to change the address to a specified MAC...which would have to fall within conventional MAC parameters. 
+
+    • Menus & Exit (1 hr) (COMPLETE)
+In order to make the app more navigable and presentable we would need to use the gems ‘tty-prompt’ and ‘colorize’ respectively. Part of tty gems is the progressbar, which could be implemented in the scans to make it seem more interactive. 
+
+
+## Testing:
+
+### IP Scanner
+### Test #1
+### --------
+#### Scenario 
+Using the IP Scanner we expect to input an IP subnet, which generates an IP range to scan, then outputs the results into a text file which returns as a table of active IPs.
+##### Expected Results:
+There will be a table displayed with active IPs, and therefore machines on the network.
+
+#### Test
+- From main menu select 'IP Scanner'
+- Enter first 3 sets of numbers in your Ip address
+
+#### Result - Pass
+Output shows that IPs have been written to file.
+Table is shown as expected. 
+
+<br>
+
+### Test # 2
+### --------
+#### Scenario 
+Using the IP Scanner with unexpected input. 
+
+##### Expected Results:
+We expect to see a red flashing rescued error message.
+
+#### Test
+- From main menu select 'IP Scanner'
+- Enter random characters as your Ip address
+
+#### Result - Pass
+Output shows red error 
+`Invalid Address config`
+This was because of the begin - rescue added with colorize.
+<br>
+<br>
+
+---
+### Port Scanner
+#### Scenario 
+Using the Port scanner we will need a Host IP Address and a Port. Once the IP address is received from the user, the application will scan the array of ports.  
+
+##### Expected Results:
+There will be a progress bar, after which, there will be a list of all the ports scanned and whether they are open or not. If a connection is lost all ports will come up closed. 
+if you see [*] Scan Complete! :-)
+= successful run.
+
+
+#### Test
+- In terminal enter the command <br>
+`ss -lntu` <br>
+& take note of the ports that say LISTEN (after [IP]:)
+- From main menu in the app select 'Port Scanner'
+- After prompt Press enter
+
+#### Result
+[*] Scan Complete! :-)
+Compare open ports (if there are any to your initial notes)
+For me they are the same = Successful result.
+
+---
+
+### MAC Changer
+#### Scenario 
+** WARNING: This may disconnect you from your network if you are using that Network Interface.
+
+Using the MAC Changer with a different mac address 
+
+#### Expected Results:
+We expect to see a different MAC from before the test.
+
+#### Test
+1. In main menu of application select `MAC Changer`
+2. In sub menu select `Change MAC Address`
+3. Type current network interface
+eg. `enp0s3`
+4. Copy & Paste current MAC, then change last two characters to new ones.
+5. In terminal type `ip addr` and see if your MAC has been changed after `link/ether`
+
+#### Result - Pass
+Success! - MAC address has new ID as expected. 
+this was done using native linux commands eg. `ip link set`
+
+---

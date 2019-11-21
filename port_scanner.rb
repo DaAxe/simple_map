@@ -16,7 +16,7 @@ system("ip -o -4  address show  | awk ' NR==2 { gsub(/\\/.*/, \"\", $4); print $
 puts ""
 puts "Enter Your Target"
 puts "  or"
-puts "Press Enter for Local-Host IP"
+puts "Press [Enter] for Local-Host IP"
 puts "IP Address: "
 
 # Loopback Adapter acts as local IP, by pressing enter it means 
